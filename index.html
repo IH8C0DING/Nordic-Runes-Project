@@ -1,0 +1,418 @@
+﻿<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-fullscreen" />
+		<title>Rune Puzzle � Elder Futhark Games</title>
+		<link rel="stylesheet" href="styles.css" />
+		<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+	</head>
+	<body>
+		<audio id="bgMusic" loop autoplay>
+			<source src="Background music.mp3" type="audio/mpeg">
+		</audio>
+		
+		<!-- QR Code in upper right corner -->
+		<div id="qrCode" class="qr-code-container"></div>
+		
+		<main class="container">
+			<nav class="tabs">
+				<button data-target="home" class="tab active">Home</button>
+				<button data-target="translate" class="tab">Translate Word</button>
+				<button data-target="puzzle" class="tab">Rune Puzzle</button>
+			</nav>
+
+		<section id="home" class="panel">
+			<div class="article-container">
+				<button class="article-nav article-nav-left">
+					<svg viewBox="0 0 100 100" class="shield-svg">
+						<defs>
+							<radialGradient id="redGrad">
+								<stop offset="0%" stop-color="#c0392b" />
+								<stop offset="50%" stop-color="#8b0000" />
+								<stop offset="100%" stop-color="#5a0000" />
+							</radialGradient>
+							<radialGradient id="woodGrad">
+								<stop offset="0%" stop-color="#8b5a3c" />
+								<stop offset="50%" stop-color="#6b4423" />
+								<stop offset="100%" stop-color="#4a2f1a" />
+							</radialGradient>
+							<radialGradient id="bossGrad">
+								<stop offset="0%" stop-color="#9a9a9a" />
+								<stop offset="50%" stop-color="#5a5a5a" />
+								<stop offset="100%" stop-color="#2a2a2a" />
+							</radialGradient>
+							<clipPath id="topHalf">
+								<rect x="0" y="0" width="100" height="50"/>
+							</clipPath>
+							<clipPath id="bottomHalf">
+								<rect x="0" y="50" width="100" height="50"/>
+							</clipPath>
+						</defs>
+						<!-- Red top half -->
+						<circle cx="50" cy="50" r="45" fill="url(#redGrad)" clip-path="url(#topHalf)"/>
+						<!-- Wooden bottom half -->
+						<circle cx="50" cy="50" r="45" fill="url(#woodGrad)" clip-path="url(#bottomHalf)"/>
+						<!-- Wood planks effect -->
+						<path d="M 50 5 L 50 95" stroke="#3a2817" stroke-width="1" opacity="0.3"/>
+						<path d="M 30 10 L 30 90" stroke="#3a2817" stroke-width="1" opacity="0.3"/>
+						<path d="M 70 10 L 70 90" stroke="#3a2817" stroke-width="1" opacity="0.3"/>
+						<!-- Dividing line -->
+						<line x1="5" y1="50" x2="95" y2="50" stroke="#1a1a1a" stroke-width="2"/>
+						<!-- Metal rim -->
+						<circle cx="50" cy="50" r="45" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+						<circle cx="50" cy="50" r="43" fill="none" stroke="#4a4a4a" stroke-width="1" opacity="0.5"/>
+						<!-- Boss (center metal dome) -->
+						<circle cx="50" cy="50" r="18" fill="url(#bossGrad)" stroke="#1a1a1a" stroke-width="2"/>
+						<circle cx="50" cy="50" r="16" fill="none" stroke="#6a6a6a" stroke-width="1" opacity="0.7"/>
+						<!-- Rivets -->
+						<circle cx="50" cy="18" r="3" fill="#4a4a4a" stroke="#1a1a1a" stroke-width="1"/>
+						<circle cx="82" cy="50" r="3" fill="#4a4a4a" stroke="#1a1a1a" stroke-width="1"/>
+						<circle cx="50" cy="82" r="3" fill="#4a4a4a" stroke="#1a1a1a" stroke-width="1"/>
+						<circle cx="18" cy="50" r="3" fill="#4a4a4a" stroke="#1a1a1a" stroke-width="1"/>
+					</svg>
+				</button>
+				<div class="article-scroller">
+					<article class="rune-article">
+					<div class="article-section active">
+						<h1>The Ancient Art of Viking Runes</h1>
+						<p>The runic alphabet, known as the Futhark, represents one of the most fascinating writing systems of ancient Northern Europe. Used by Germanic peoples, including the Vikings, runes served not only as a means of communication but also held deep spiritual and magical significance.</p>
+					</div>						<div class="article-section">
+							<h2>Origins and History</h2>
+							<p>The earliest runic inscriptions date back to around 150 AD, found primarily in Denmark and Southern Sweden. The word "rune" itself comes from the Old Norse word "rún," meaning "secret" or "mystery," reflecting the mystical importance these symbols held in Norse culture.</p>
+						</div>
+						
+						<div class="article-section">
+							<h2>Types of Runic Scripts</h2>
+							<p>Over time, the runic alphabet evolved into different variants. The Younger Futhark, developed around 800 AD, reduced the number of characters to 16. This simplified version became the standard in Scandinavia during the Viking Age. Anglo-Saxon Futhorc expanded the Elder Futhark to include additional sounds specific to Old English.</p>
+						</div>
+					</article>
+				</div>
+				<div class="article-pagination">
+					<div class="pagination-dot active" data-page="0"></div>
+					<div class="pagination-line"></div>
+					<div class="pagination-dot" data-page="1"></div>
+					<div class="pagination-line"></div>
+					<div class="pagination-dot" data-page="2"></div>
+				</div>
+				<button class="article-nav article-nav-right">
+					<svg viewBox="0 0 100 100" class="shield-svg">
+						<defs>
+							<radialGradient id="blueGrad">
+								<stop offset="0%" stop-color="#3498db" />
+								<stop offset="50%" stop-color="#1a5490" />
+								<stop offset="100%" stop-color="#0d2f5a" />
+							</radialGradient>
+						</defs>
+						<!-- Wooden top half -->
+						<circle cx="50" cy="50" r="45" fill="url(#woodGrad)" clip-path="url(#topHalf)"/>
+						<!-- Blue bottom half -->
+						<circle cx="50" cy="50" r="45" fill="url(#blueGrad)" clip-path="url(#bottomHalf)"/>
+						<!-- Wood planks effect -->
+						<path d="M 50 5 L 50 95" stroke="#3a2817" stroke-width="1" opacity="0.3"/>
+						<path d="M 30 10 L 30 90" stroke="#3a2817" stroke-width="1" opacity="0.3"/>
+						<path d="M 70 10 L 70 90" stroke="#3a2817" stroke-width="1" opacity="0.3"/>
+						<!-- Dividing line -->
+						<line x1="5" y1="50" x2="95" y2="50" stroke="#1a1a1a" stroke-width="2"/>
+						<!-- Metal rim -->
+						<circle cx="50" cy="50" r="45" fill="none" stroke="#1a1a1a" stroke-width="3"/>
+						<circle cx="50" cy="50" r="43" fill="none" stroke="#4a4a4a" stroke-width="1" opacity="0.5"/>
+						<!-- Boss (center metal dome) -->
+						<circle cx="50" cy="50" r="18" fill="url(#bossGrad)" stroke="#1a1a1a" stroke-width="2"/>
+						<circle cx="50" cy="50" r="16" fill="none" stroke="#6a6a6a" stroke-width="1" opacity="0.7"/>
+						<!-- Rivets -->
+						<circle cx="50" cy="18" r="3" fill="#4a4a4a" stroke="#1a1a1a" stroke-width="1"/>
+						<circle cx="82" cy="50" r="3" fill="#4a4a4a" stroke="#1a1a1a" stroke-width="1"/>
+						<circle cx="50" cy="82" r="3" fill="#4a4a4a" stroke="#1a1a1a" stroke-width="1"/>
+						<circle cx="18" cy="50" r="3" fill="#4a4a4a" stroke="#1a1a1a" stroke-width="1"/>
+					</svg>
+				</button>
+			</div>
+		</section>		<section id="translate" class="panel hidden">
+			<div class="memory-game-container">
+				<div id="memoryGrid" class="memory-grid"></div>
+			</div>
+		</section>		<section id="puzzle" class="panel hidden">
+		<div class="ring-puzzle-wrap">
+			<svg class="ring-puzzle ring-puzzle-v3test3" viewBox="0 0 400 400">
+			<defs>
+				<clipPath id="clipOuter1test3"><rect x="-150" y="0" width="50" height="400" /></clipPath>
+				<clipPath id="clipMiddle1test3"><rect x="-100" y="0" width="50" height="400" /></clipPath>
+				<clipPath id="clipOuter2test3"><rect x="-50" y="0" width="50" height="400" /></clipPath>
+				<clipPath id="clipMiddle2test3"><rect x="0" y="0" width="50" height="400" /></clipPath>
+				<clipPath id="clipOuter3test3"><rect x="60" y="0" width="50" height="400" /></clipPath>
+				<clipPath id="clipMiddle3test3"><rect x="110" y="0" width="50" height="400" /></clipPath>
+				<clipPath id="clipOuter4test3"><rect x="210" y="0" width="50" height="400" /></clipPath>
+				<clipPath id="clipMiddle4test3"><rect x="260" y="0" width="50" height="400" /></clipPath>
+				<clipPath id="clipOuter5test3"><rect x="330" y="0" width="50" height="400" /></clipPath>
+				<clipPath id="clipMiddle5test3"><rect x="380" y="0" width="50" height="400" /></clipPath>
+				<clipPath id="clipOuter6test3"><rect x="450" y="0" width="50" height="400" /></clipPath>
+				<clipPath id="clipMiddle6test3"><rect x="500" y="0" width="50" height="400" /></clipPath>
+
+				<linearGradient id="braidStone1" x1="0%" y1="0%" x2="0%" y2="100%">
+					<stop offset="0%" stop-color="#7f6d5c" />
+					<stop offset="100%" stop-color="#3a2f27" />
+				</linearGradient>
+				<linearGradient id="braidStone2" x1="0%" y1="0%" x2="0%" y2="100%">
+					<stop offset="0%" stop-color="#6e6653" />
+					<stop offset="100%" stop-color="#2f2b1f" />
+				</linearGradient>
+				<linearGradient id="braidStone3" x1="0%" y1="0%" x2="0%" y2="100%">
+					<stop offset="0%" stop-color="#6a5f47" />
+					<stop offset="100%" stop-color="#2a2318" />
+				</linearGradient>
+				<linearGradient id="braidStone4" x1="0%" y1="0%" x2="0%" y2="100%">
+					<stop offset="0%" stop-color="#5f5a45" />
+					<stop offset="100%" stop-color="#231f16" />
+				</linearGradient>
+				<linearGradient id="braidStone5" x1="0%" y1="0%" x2="0%" y2="100%">
+					<stop offset="0%" stop-color="#545041" />
+					<stop offset="100%" stop-color="#1d1a14" />
+				</linearGradient>
+				<linearGradient id="braidStone6" x1="0%" y1="0%" x2="0%" y2="100%">
+					<stop offset="0%" stop-color="#4b483d" />
+					<stop offset="100%" stop-color="#16130f" />
+				</linearGradient>
+
+				<filter id="stoneTextureCool" x="-50%" y="-50%" width="200%" height="200%">
+					<feTurbulence type="fractalNoise" baseFrequency="0.1 0.08" numOctaves="4" seed="36" result="grain" />
+					<feColorMatrix in="grain" type="matrix" values="0 0 0 0 0.34  0 0 0 0 0.36  0 0 0 0 0.4  0 0 0 0.7 0" result="grainTint" />
+					<feBlend in="SourceGraphic" in2="grainTint" mode="multiply" result="shaded" />
+					<feTurbulence type="fractalNoise" baseFrequency="0.04 0.032" numOctaves="3" seed="61" result="pock" />
+					<feColorMatrix in="pock" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.55" result="pockMask" />
+					<feComposite in="shaded" in2="pockMask" operator="arithmetic" k1="1" k3="-0.5" result="pitted" />
+					<feTurbulence type="turbulence" baseFrequency="0.018 0.015" numOctaves="2" seed="103" result="veins" />
+					<feColorMatrix in="veins" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.88" result="veinMask" />
+					<feBlend in="pitted" in2="veinMask" mode="overlay" result="stoneTextureBase" />
+					<feTurbulence type="turbulence" baseFrequency="0.011 0.0065" numOctaves="1" seed="158" result="crackNoise" />
+					<feColorMatrix in="crackNoise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 20 -10" result="crackMask" />
+					<feFlood flood-color="#14191f" result="crackColor" />
+					<feComposite in="crackColor" in2="crackMask" operator="in" result="crackLayer" />
+					<feBlend in="stoneTextureBase" in2="crackLayer" mode="multiply" result="stoneTextureRaw" />
+					<feComponentTransfer in="stoneTextureRaw" result="stoneTexture">
+						<feFuncR type="gamma" exponent="0.62" amplitude="1.22" offset="0.015" />
+						<feFuncG type="gamma" exponent="0.62" amplitude="1.24" offset="0.02" />
+						<feFuncB type="gamma" exponent="0.62" amplitude="1.26" offset="0.02" />
+						<feFuncA type="linear" slope="1" intercept="0" />
+					</feComponentTransfer>
+					<feComposite in="stoneTexture" in2="SourceGraphic" operator="in" result="stoneTextureMasked" />
+					<feMerge>
+						<feMergeNode in="SourceGraphic" />
+						<feMergeNode in="stoneTextureMasked" />
+					</feMerge>
+				</filter>
+				
+				<!-- Sword SVG for tab indicator -->
+				<symbol id="swordIcon" viewBox="0 0 100 20">
+					<g>
+						<!-- Blade -->
+						<rect x="0" y="8" width="70" height="4" fill="#fff" />
+						<!-- Point -->
+						<polygon points="70,6 70,14 80,10" fill="#fff" />
+						<!-- Guard -->
+						<rect x="20" y="4" width="3" height="12" fill="#fff" />
+						<!-- Handle -->
+						<rect x="5" y="8.5" width="18" height="3" fill="#fff" />
+						<!-- Pommel -->
+						<circle cx="5" cy="10" r="3" fill="#fff" />
+					</g>
+				</symbol>
+				
+				<filter id="runeGlowFilter" x="-200%" y="-200%" width="500%" height="500%">
+					<!-- Create the base blood red text -->
+					<feFlood flood-color="#8b0000" result="baseBloodRed"/>
+					<feComposite in="baseBloodRed" in2="SourceGraphic" operator="in" result="bloodRedText"/>
+					
+					<!-- Create bloom effect with multiple soft blurs -->
+					<feGaussianBlur in="bloodRedText" stdDeviation="2" result="softBlur1"/>
+					<feGaussianBlur in="bloodRedText" stdDeviation="4" result="softBlur2"/>
+					<feGaussianBlur in="bloodRedText" stdDeviation="8" result="softBlur3"/>
+					<feGaussianBlur in="bloodRedText" stdDeviation="12" result="softBlur4"/>
+					
+					<!-- Blend all blur layers together for bloom -->
+					<feMerge result="bloomLayers">
+						<feMergeNode in="softBlur4"/>
+						<feMergeNode in="softBlur3"/>
+						<feMergeNode in="softBlur2"/>
+						<feMergeNode in="softBlur1"/>
+					</feMerge>
+					
+					<!-- Brighten the bloom -->
+					<feColorMatrix in="bloomLayers" type="matrix" 
+						values="1.5 0 0 0 0
+								0 0 0 0 0
+								0 0 0 0 0
+								0 0 0 1.2 0" result="brightBloom"/>
+					
+					<!-- Final composite -->
+					<feMerge>
+						<feMergeNode in="brightBloom"/>
+						<feMergeNode in="bloodRedText"/>
+						<feMergeNode in="SourceGraphic"/>
+					</feMerge>
+				</filter>
+			</defs>
+
+			<g id="v3OuterRune1test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<circle cx="200" cy="200" r="390" fill="none" stroke="#3b3b3b" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:stroke;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3outer1test3" />
+			</g>
+			<g id="v3MiddleRune1test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<circle cx="200" cy="200" r="365" fill="none" stroke="#343434" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:stroke;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3middle1test3" />
+			</g>
+			<circle cx="200" cy="200" r="377.5" fill="none" stroke="#3b3b3b" stroke-width="8" opacity="0.98" style="pointer-events:none;" />
+
+			<g id="v3OuterRune2test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<circle cx="200" cy="200" r="330" fill="none" stroke="#3a3a3a" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:stroke;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3outer2test3" />
+			</g>
+			<g id="v3MiddleRune2test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<circle cx="200" cy="200" r="305" fill="none" stroke="#323232" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:stroke;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3middle2test3" />
+			</g>
+			<circle cx="200" cy="200" r="317.5" fill="none" stroke="#3a3a3a" stroke-width="8" opacity="0.98" style="pointer-events:none;" />
+
+			<g id="v3OuterRune3test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<circle cx="200" cy="200" r="270" fill="none" stroke="#3f3f3f" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:stroke;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3outer3test3" />
+			</g>
+			<g id="v3MiddleRune3test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<circle cx="200" cy="200" r="245" fill="none" stroke="#353535" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:stroke;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3middle3test3" />
+			</g>
+			<circle cx="200" cy="200" r="257.5" fill="none" stroke="#3f3f3f" stroke-width="8" opacity="0.98" style="pointer-events:none;" />
+
+			<g id="v3OuterRune4test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<circle cx="200" cy="200" r="210" fill="none" stroke="#3c3c3c" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:stroke;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3outer4test3" />
+			</g>
+			<g id="v3MiddleRune4test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<circle cx="200" cy="200" r="185" fill="none" stroke="#343434" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:stroke;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3middle4test3" />
+			</g>
+			<circle cx="200" cy="200" r="197.5" fill="none" stroke="#3c3c3c" stroke-width="8" opacity="0.98" style="pointer-events:none;" />
+
+			<g id="v3OuterRune5test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<circle cx="200" cy="200" r="150" fill="none" stroke="#3d3d3d" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:stroke;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3outer5test3" />
+			</g>
+			<g id="v3MiddleRune5test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<circle cx="200" cy="200" r="125" fill="none" stroke="#343434" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:stroke;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3middle5test3" />
+			</g>
+			<circle cx="200" cy="200" r="137.5" fill="none" stroke="#3d3d3d" stroke-width="8" opacity="0.98" style="pointer-events:none;" />
+
+			<g id="v3OuterRune6test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<circle cx="200" cy="200" r="90" fill="none" stroke="#373737" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:stroke;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3outer6test3" />
+			</g>
+		<g id="v3MiddleRune6test3" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+			<circle cx="200" cy="200" r="65" fill="#313131" stroke="#313131" stroke-width="32" opacity="1" style="cursor:pointer;pointer-events:all;" filter="url(#stoneTextureCool)" class="puzzle-ring" data-ring="v3middle6test3" />
+		</g>
+		<circle cx="200" cy="200" r="77.5" fill="none" stroke="#373737" stroke-width="8" opacity="0.98" style="pointer-events:none;" />			<g id="v3OuterRune1test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="-100" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipOuter1test3)">ᚠ</text>
+			</g>
+			<g id="v3MiddleRune1test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="-100" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipMiddle1test3)">ᚠ</text>
+			</g>
+			<g id="v3OuterRune2test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="0" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipOuter2test3)">ᛁ</text>
+			</g>
+			<g id="v3MiddleRune2test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="0" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipMiddle2test3)">ᛁ</text>
+			</g>
+			<g id="v3OuterRune3test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="110" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipOuter3test3)">ᚱ</text>
+			</g>
+			<g id="v3MiddleRune3test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="110" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipMiddle3test3)">ᚱ</text>
+			</g>
+			<g id="v3OuterRune4test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="260" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipOuter4test3)">ᛒ</text>
+			</g>
+			<g id="v3MiddleRune4test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="260" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipMiddle4test3)">ᛒ</text>
+			</g>
+			<g id="v3OuterRune5test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="380" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipOuter5test3)">ᛖ</text>
+			</g>
+			<g id="v3MiddleRune5test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="380" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipMiddle5test3)">ᛖ</text>
+			</g>
+			<g id="v3OuterRune6test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="500" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipOuter6test3)">ᛚ</text>
+			</g>
+			<g id="v3MiddleRune6test3Text" style="transform-origin:200px 200px;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;">
+				<text class="ring-rune" x="500" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#c49f5b" clip-path="url(#clipMiddle6test3)">ᛚ</text>
+			</g>
+	</svg>
+	</div>
+	</section>
+</main>
+
+<script src="app.js"></script>
+<script>
+// Generate functional QR Code
+window.addEventListener('DOMContentLoaded', function() {
+  const qrContainer = document.getElementById('qrCode');
+  
+  // Get current page URL and ensure it goes to home
+  const baseURL = window.location.origin + window.location.pathname;
+  const mobileURL = baseURL + '?mobile=1';
+  
+  // Generate QR code using QRCode library
+  new QRCode(qrContainer, {
+    text: mobileURL,
+    width: 104,
+    height: 104,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+});
+
+// Handle mobile orientation and fullscreen
+if (window.location.search.includes('mobile=1')) {
+  // Force landscape on mobile
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock('landscape').catch(() => {
+      console.log('Orientation lock not supported');
+    });
+  }
+  
+  // Request fullscreen on mobile on first touch
+  document.addEventListener('touchstart', function requestFS() {
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    }
+    document.removeEventListener('touchstart', requestFS);
+  }, { once: true });
+}
+
+window.addEventListener('load', function() {
+    const video = document.getElementById('videoBG');
+    if (video) {
+        console.log('Video element found');
+        video.play().catch(e => console.log('Video error:', e));
+    }
+    
+    // Attempt to play music immediately
+    const music = document.getElementById('bgMusic');
+    if (music) {
+        music.muted = false;
+        music.volume = 0.5; // Set to 50% volume
+        music.play().catch(e => {
+            console.log('Music autoplay blocked, waiting for user interaction');
+            // If autoplay is blocked, play on first user interaction
+            const playMusic = () => {
+                music.play();
+                document.removeEventListener('click', playMusic);
+                document.removeEventListener('touchstart', playMusic);
+                document.removeEventListener('keydown', playMusic);
+            };
+            document.addEventListener('click', playMusic, { once: true });
+            document.addEventListener('touchstart', playMusic, { once: true });
+            document.addEventListener('keydown', playMusic, { once: true });
+        });
+    }
+});
+</script>
+</body>
+</html>

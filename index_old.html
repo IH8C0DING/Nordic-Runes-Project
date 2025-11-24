@@ -1,0 +1,289 @@
+﻿<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Rune Puzzle — Elder Futhark Games</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<header class="site-header">
+			<h1>Rune Puzzle — Elder Futhark</h1>
+			<p class="tagline">Write your name in runes, translate words, and play a rune-matching puzzle.</p>
+		</header>
+
+		<main class="container">
+			<nav class="tabs">
+				<button data-target="write" class="tab active">Write Name</button>
+				<button data-target="translate" class="tab">Translate Word</button>
+				<button data-target="puzzle" class="tab">Rune Puzzle</button>
+			</nav>
+
+			<section id="write" class="panel">
+				<h2>Write your name in Elder Futhark</h2>
+				<label>Type your name or text:
+					<input id="nameInput" type="text" placeholder="e.g. Freya" />
+				</label>
+						<div class="controls">
+							<button id="transliterateBtn">Render in Runes</button>
+							<button id="copyRunesBtn">Copy Runes</button>
+							<button id="carveBtn">Start Carving</button>
+						</div>
+						<div id="nameOutput" class="rune-line" aria-live="polite"></div>
+
+						<div id="carvingArea" class="carving-area hidden">
+								<h3>Rune Carving — trace each rune on the stone</h3>
+								<p class="muted">Use the chisel (hover + drag) to shave the stone, or use the hammer (click) to strike larger chips. Adjust size as needed.</p>
+
+								<div id="toolPalette" class="tool-palette">
+									<button id="toolChisel" class="tool-btn active" title="Chisel (hover + drag)">Chisel</button>
+									<button id="toolHammer" class="tool-btn" title="Hammer (click to strike)">Hammer</button>
+									<label class="size-label">Size <input id="toolSize" type="range" min="6" max="28" value="12" /></label>
+									<span id="toolHint" class="tool-hint">Chisel: drag to carve • Hammer: click to strike</span>
+										</div>
+
+										<div id="stoneContainer" class="stone-container"></div>
+							<div class="carve-controls">
+								<button id="resetCarve">Reset</button>
+								<button id="finishCarve">Finish</button>
+							</div>
+						</div>
+			</section>
+
+			<section id="translate" class="panel hidden">
+				<h2>Translate runes to Latin</h2>
+				<label>Paste runes here:
+					<input id="runeInput" type="text" placeholder="ᚠᚱᛖᚤᚨ" />
+				</label>
+				<div class="controls">
+					<button id="translateBtn">Translate</button>
+				</div>
+				<div id="translateOutput" class="translate-output" aria-live="polite"></div>
+			</section>
+
+			<section id="puzzle" class="panel hidden">
+				<h2>Rune Rings Puzzle</h2>
+				<p>Click the outer ring or middle ring to rotate the rune pieces. Align both halves to complete the symbol!</p>
+				
+			<div class="ring-puzzle-wrap">
+				<svg class="ring-puzzle ring-puzzle-v3test" viewBox="-350 -350 1100 1100" width="2000" height="2000">
+				<defs>
+					<!-- Clip paths for 6 runes, each split in half -->
+					<clipPath id="clipOuter1test"><rect x="20" y="0" width="30" height="400" /></clipPath>
+					<clipPath id="clipMiddle1test"><rect x="50" y="0" width="30" height="400" /></clipPath>
+					
+					<clipPath id="clipOuter2test"><rect x="80" y="0" width="30" height="400" /></clipPath>
+					<clipPath id="clipMiddle2test"><rect x="110" y="0" width="30" height="400" /></clipPath>
+					
+					<clipPath id="clipOuter3test"><rect x="140" y="0" width="30" height="400" /></clipPath>
+					<clipPath id="clipMiddle3test"><rect x="170" y="0" width="30" height="400" /></clipPath>
+					
+					<clipPath id="clipOuter4test"><rect x="200" y="0" width="30" height="400" /></clipPath>
+					<clipPath id="clipMiddle4test"><rect x="230" y="0" width="30" height="400" /></clipPath>
+					
+					<clipPath id="clipOuter5test"><rect x="260" y="0" width="30" height="400" /></clipPath>
+					<clipPath id="clipMiddle5test"><rect x="290" y="0" width="30" height="400" /></clipPath>
+					
+					<clipPath id="clipOuter6test"><rect x="320" y="0" width="30" height="400" /></clipPath>
+					<clipPath id="clipMiddle6test"><rect x="350" y="0" width="30" height="400" /></clipPath>
+				</defs>					<!-- Ring 1: Outer band at r=390 and Inner band at r=365 -->
+				<!-- Rune 1 (áš ): left piece on outermost ring, right piece on 2nd ring -->
+				<g id="v3OuterRune1test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="390" fill="none" stroke="#ff0000" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer1test" />
+				<text class="ring-rune" x="50" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter1test)">ᚠ</text>
+				</g>
+				<g id="v3MiddleRune1test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="365" fill="none" stroke="#ff0000" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle1test" />
+				<text class="ring-rune" x="50" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle1test)">ᚠ</text>
+				</g>
+				<!-- Separator line between rune 1 pieces -->
+				<circle cx="200" cy="200" r="377.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+				
+				<!-- Rune 2 (á›): left piece on 3rd ring, right piece on 4th ring -->
+				<g id="v3OuterRune2test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="330" fill="none" stroke="#ff8800" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer2test" />
+				<text class="ring-rune" x="110" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter2test)">ᛁ</text>
+				</g>
+				<g id="v3MiddleRune2test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="305" fill="none" stroke="#ff8800" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle2test" />
+				<text class="ring-rune" x="110" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle2test)">ᛁ</text>
+				</g>
+				<!-- Separator line between rune 2 pieces -->
+				<circle cx="200" cy="200" r="317.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+				
+				<!-- Rune 3 (áš±): left piece on 5th ring, right piece on 6th ring -->
+				<g id="v3OuterRune3test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="270" fill="none" stroke="#ffdd00" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer3test" />
+					<text class="ring-rune" x="170" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter3test)">ᚱ</text>
+				</g>
+				<g id="v3MiddleRune3test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="245" fill="none" stroke="#ffdd00" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle3test" />
+					<text class="ring-rune" x="170" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle3test)">ᚱ</text>
+				</g>
+				<!-- Separator line between rune 3 pieces -->
+				<circle cx="200" cy="200" r="257.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+				
+				<!-- Rune 4 (á›–): left piece on 7th ring, right piece on 8th ring -->
+				<g id="v3OuterRune4test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="210" fill="none" stroke="#00ff00" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer4test" />
+					<text class="ring-rune" x="230" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter4test)">ᛖ</text>
+				</g>
+				<g id="v3MiddleRune4test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="185" fill="none" stroke="#00ff00" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle4test" />
+					<text class="ring-rune" x="230" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle4test)">ᛖ</text>
+				</g>
+				<!-- Separator line between rune 4 pieces -->
+				<circle cx="200" cy="200" r="197.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+				
+				<!-- Rune 5 (áš¹): left piece on 9th ring, right piece on 10th ring -->
+				<g id="v3OuterRune5test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="150" fill="none" stroke="#0088ff" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer5test" />
+					<text class="ring-rune" x="290" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter5test)">ᚹ</text>
+				</g>
+				<g id="v3MiddleRune5test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="125" fill="none" stroke="#0088ff" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle5test" />
+					<text class="ring-rune" x="290" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle5test)">ᚹ</text>
+				</g>
+				<!-- Separator line between rune 5 pieces -->
+				<circle cx="200" cy="200" r="137.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+				
+				<!-- Rune 6 (á›Ÿ): left piece on 11th ring, right piece on 12th ring -->
+				<g id="v3OuterRune6test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="90" fill="none" stroke="#8800ff" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer6test" />
+					<text class="ring-rune" x="350" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter6test)">ᛟ</text>
+				</g>
+				<g id="v3MiddleRune6test" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+					<circle cx="200" cy="200" r="65" fill="none" stroke="#8800ff" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle6test" />
+					<text class="ring-rune" x="350" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle6test)">ᛟ</text>
+				</g>
+			<!-- Separator line between rune 6 pieces -->
+			<circle cx="200" cy="200" r="77.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+			</svg>
+		</div>
+
+		<div class="ring-puzzle-wrap">
+			<svg class="ring-puzzle ring-puzzle-v3test2" viewBox="-350 -350 1100 1100" width="2000" height="2000">
+			<defs>
+				<!-- Clip paths for 6 runes, each split in half -->
+			<clipPath id="clipOuter1test2"><rect x="-150" y="0" width="50" height="400" /></clipPath>
+			<clipPath id="clipMiddle1test2"><rect x="-100" y="0" width="50" height="400" /></clipPath>			<clipPath id="clipOuter2test2"><rect x="-30" y="0" width="50" height="400" /></clipPath>
+			<clipPath id="clipMiddle2test2"><rect x="20" y="0" width="50" height="400" /></clipPath>			<clipPath id="clipOuter3test2"><rect x="90" y="0" width="50" height="400" /></clipPath>
+			<clipPath id="clipMiddle3test2"><rect x="140" y="0" width="50" height="400" /></clipPath>			<clipPath id="clipOuter4test2"><rect x="210" y="0" width="50" height="400" /></clipPath>
+			<clipPath id="clipMiddle4test2"><rect x="260" y="0" width="50" height="400" /></clipPath>			<clipPath id="clipOuter5test2"><rect x="330" y="0" width="50" height="400" /></clipPath>
+			<clipPath id="clipMiddle5test2"><rect x="380" y="0" width="50" height="400" /></clipPath>			<clipPath id="clipOuter6test2"><rect x="450" y="0" width="50" height="400" /></clipPath>
+			<clipPath id="clipMiddle6test2"><rect x="500" y="0" width="50" height="400" /></clipPath>
+			</defs>					<!-- Ring 1: Outer band at r=390 and Inner band at r=365 -->
+			<!-- Rune 1 (ᚠ): left piece on outermost ring, right piece on 2nd ring -->
+			<g id="v3OuterRune1test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="390" fill="none" stroke="#ff0000" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer1test2" />
+			</g>
+			<g id="v3MiddleRune1test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="365" fill="none" stroke="#ff0000" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle1test2" />
+			</g>
+			<!-- Separator line between rune 1 pieces -->
+			<circle cx="200" cy="200" r="377.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+			
+			<!-- Rune 2 (ᛁ): left piece on 3rd ring, right piece on 4th ring -->
+			<g id="v3OuterRune2test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="330" fill="none" stroke="#ff8800" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer2test2" />
+			</g>
+			<g id="v3MiddleRune2test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="305" fill="none" stroke="#ff8800" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle2test2" />
+			</g>
+			<!-- Separator line between rune 2 pieces -->
+			<circle cx="200" cy="200" r="317.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+			
+			<!-- Rune 3 (ᚱ): left piece on 5th ring, right piece on 6th ring -->
+			<g id="v3OuterRune3test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="270" fill="none" stroke="#ffdd00" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer3test2" />
+			</g>
+			<g id="v3MiddleRune3test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="245" fill="none" stroke="#ffdd00" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle3test2" />
+			</g>
+			<!-- Separator line between rune 3 pieces -->
+			<circle cx="200" cy="200" r="257.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+			
+			<!-- Rune 4 (ᛖ): left piece on 7th ring, right piece on 8th ring -->
+			<g id="v3OuterRune4test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="210" fill="none" stroke="#00ff00" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer4test2" />
+			</g>
+			<g id="v3MiddleRune4test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="185" fill="none" stroke="#00ff00" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle4test2" />
+			</g>
+			<!-- Separator line between rune 4 pieces -->
+			<circle cx="200" cy="200" r="197.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+			
+			<!-- Rune 5 (ᚹ): left piece on 9th ring, right piece on 10th ring -->
+			<g id="v3OuterRune5test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="150" fill="none" stroke="#0088ff" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer5test2" />
+			</g>
+			<g id="v3MiddleRune5test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="125" fill="none" stroke="#0088ff" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle5test2" />
+			</g>
+			<!-- Separator line between rune 5 pieces -->
+			<circle cx="200" cy="200" r="137.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+			
+			<!-- Rune 6 (ᛟ): left piece on 11th ring, right piece on 12th ring -->
+			<g id="v3OuterRune6test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="90" fill="none" stroke="#8800ff" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3outer6test2" />
+			</g>
+			<g id="v3MiddleRune6test2" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+				<circle cx="200" cy="200" r="65" fill="none" stroke="#8800ff" stroke-width="40" opacity="0.4" style="cursor:pointer; pointer-events:stroke;" class="puzzle-ring" data-ring="v3middle6test2" />
+			</g>
+		<!-- Separator line between rune 6 pieces -->
+		<circle cx="200" cy="200" r="77.5" fill="none" stroke="#333" stroke-width="2" opacity="0.6" style="pointer-events:none;" />
+		
+		<!-- Text layer - all runes rendered on top -->
+		<g id="v3OuterRune1test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="-100" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter1test2)">ᚠ</text>
+		</g>
+		<g id="v3MiddleRune1test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="-100" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle1test2)">ᚠ</text>
+		</g>
+		<g id="v3OuterRune2test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="20" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter2test2)">ᛁ</text>
+		</g>
+		<g id="v3MiddleRune2test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="20" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle2test2)">ᛁ</text>
+		</g>
+		<g id="v3OuterRune3test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="140" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter3test2)">ᚱ</text>
+		</g>
+		<g id="v3MiddleRune3test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="140" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle3test2)">ᚱ</text>
+		</g>
+		<g id="v3OuterRune4test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="260" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter4test2)">ᛖ</text>
+		</g>
+		<g id="v3MiddleRune4test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="260" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle4test2)">ᛖ</text>
+		</g>
+		<g id="v3OuterRune5test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="380" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter5test2)">ᚹ</text>
+		</g>
+		<g id="v3MiddleRune5test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="380" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle5test2)">ᚹ</text>
+		</g>
+		<g id="v3OuterRune6test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="500" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipOuter6test2)">ᛟ</text>
+		</g>
+		<g id="v3MiddleRune6test2Text" style="transform-origin: 200px 200px; transition: transform 0.4s cubic-bezier(0.4,0,0.2,1); pointer-events:none;">
+			<text class="ring-rune" x="500" y="200" text-anchor="middle" dy=".3em" font-size="120" fill="#6b4f2b" clip-path="url(#clipMiddle6test2)">ᛟ</text>
+		</g>
+		</svg>
+	</div>
+	</section>
+
+	<section id="translate" class="panel hidden">
+		<h2>Rune Translation Game</h2>
+		<p>Translate the runic message into English!</p>
+		<div id="translateDisplay"></div>
+		<input type="text" id="translateInput" placeholder="Type your translation..." />
+		<button id="translateSubmit">Check Answer</button>
+		<div id="translateResult"></div>
+	</section>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
