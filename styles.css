@@ -867,20 +867,100 @@ button:disabled{opacity:0.6}
   }
   
   .qr-code-container {
-    width: 80px;
-    height: 80px;
-    top: 10px;
-    right: 10px;
-    padding: 5px;
+    display: none;
   }
   
   .tabs {
-    margin: 10px 0;
+    margin: 5px 0;
+    gap: 5px;
   }
   
   .tab {
-    padding: 6px 10px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .tab.active::after {
+    bottom: -12px;
+    width: 40px;
+    height: 8px;
+  }
+  
+  /* Home page article scaling */
+  .rune-article h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  .rune-article h2 {
+    font-size: 2rem !important;
+  }
+  
+  .rune-article p {
+    font-size: 1.2rem !important;
+    padding: 20px 30px !important;
+  }
+  
+  .article-nav {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .pagination-dot {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .pagination-line {
+    width: 20px;
+  }
+  
+  /* Memory game scaling */
+  .memory-game-container {
+    padding-top: 20px !important;
+  }
+  
+  .memory-game-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+  }
+  
+  .memory-game-container p {
     font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  
+  .memory-grid {
+    grid-template-columns: repeat(16, 60px) !important;
+    gap: 6px !important;
+    margin-top: 10px !important;
+  }
+  
+  .memory-card {
+    width: 60px !important;
+    height: 80px !important;
+  }
+  
+  .card-front,
+  .card-back {
+    font-size: 1.8rem !important;
+  }
+  
+  /* Ring puzzle scaling */
+  #testpuzzle h2 {
+    font-size: 1rem;
+  }
+  
+  #testpuzzle p {
+    font-size: 0.8rem;
+  }
+  
+  #testpuzzle .ring-puzzle {
+    width: 75vmin !important;
+    height: 75vmin !important;
+  }
+  
+  .ring-rune {
+    font-size: 180px !important;
   }
 }
 
